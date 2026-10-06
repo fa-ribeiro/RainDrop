@@ -1,0 +1,14 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.rulers": [72, 80, 96, 120, 136, 144],
+  "editor.autoIndent": "advanced",
+  "prettier.printWidth": 96,
+  "deno.enable": true,
+  "deno.lint": true,
+  "deno.codeLens.references": true,
+  "deno.codeLens.referencesAllFunctions": true,
+  "deno.codeLens.implementations": true,
+  "deno.codeLens.test": true,
+  "deno.organizeImports.enabled": true
+}

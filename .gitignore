@@ -1,0 +1,10 @@
+# Generated output: coverage reports, API docs, bundles
+coverage/
+build/
+
+# Deno does not use it; ignored in case npm tooling is ever introduced
+node_modules/
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db

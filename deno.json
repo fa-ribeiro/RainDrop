@@ -1,0 +1,24 @@
+{
+  "tasks": {
+    "fmt": "deno fmt",
+    "fmt:check": "deno fmt --check",
+    "lint": "deno lint",
+    "check": "deno task check:engine && deno task check:visualization && deno task check:tests",
+    "check:engine": "deno check src/engine",
+    "check:visualization": "deno check src/visualization",
+    "check:tests": "deno check tests",
+    "test": "deno test --allow-read=. --allow-run=deno",
+    "test:coverage": "deno test --allow-read=. --allow-run=deno --coverage=coverage && deno coverage coverage",
+    "doc:lint": "deno doc --lint src/engine/mod.ts src/visualization/mod.ts",
+    "doc:html": "mkdir -p build && deno doc --html --name=\"Physics 2D\" --output=build/api src/engine/mod.ts src/visualization/mod.ts",
+    "verify": "deno task fmt:check && deno task lint && deno task check && deno task doc:lint && deno task test"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1"
+  },
+  "fmt": {
+    "lineWidth": 96,
+    "proseWrap": "preserve"
+  },
+  "exclude": ["coverage/", "build/"]
+}
