@@ -49,6 +49,5 @@ Splitting the scenario by the physics involved shows where the engine is faithfu
 
 1. Materials: default density, friction and restitution values (wood-like), with cited sources.
 2. Body removal and stable ids: designed with the data model, exercised by "pick and delete".
-3. `Vector2`: the name (`Vec2` or `Vector2`) and whether it is immutable.
-4. The name of the outer folder (`src/visualization`) and whether to split it: decided in chapter A2.
-5. The project's real name.
+3. The name of the outer folder (`src/visualization`) and whether to split it: decided in chapter A3.
+4. The project's real name.

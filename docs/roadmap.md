@@ -7,7 +7,7 @@ A **chapter** (the working name for a small goal) is one unit of work: discussed
 ```mermaid
 flowchart TD
     subgraph A["A. See it move"]
-        A1["A1 Data model"] --> A2["A2 Loop and viewer"] --> A3["A3 Forces and motion"] --> A4["A4 Camera"]
+        A1["A1 Vector2"] --> A2["A2 Data model"] --> A3["A3 Loop and viewer"] --> A4["A4 Forces and motion"] --> A5["A5 Camera"]
     end
     subgraph B["B. Make it bounce"]
         B1["B1 Circle and ground"] --> B2["B2 Circle detection"] --> B3["B3 Circle response"] --> B4["B4 Spawn and launch"]
@@ -27,10 +27,11 @@ flowchart TD
 
 | Chapter                   | Content                                                                               | What you can watch                           |
 | ------------------------- | ------------------------------------------------------------------------------------- | -------------------------------------------- |
-| A1 Data model             | `Vector2`, body and world with a shapeless body; commands, step and snapshots; `core` | tests only                                   |
-| A2 Loop and viewer        | a deterministic stepper, a real-time runner, a basic canvas viewer; constant velocity | dots drifting across the canvas              |
-| A3 Forces and motion      | gravity, springs, two integrators validated against analytic solutions                | a ball flies a parabola; a spring oscillates |
-| A4 Camera                 | zoom, pan, the world-to-screen transform                                              | navigating the scene                         |
+| A1 Vector2                | the immutable 2D vector: add, sub, scale, dot, length                                 | tests only                                   |
+| A2 Data model             | a body and a world with a shapeless body; commands, step and snapshots; `core`        | tests only                                   |
+| A3 Loop and viewer        | a deterministic stepper, a real-time runner, a basic canvas viewer; constant velocity | dots drifting across the canvas              |
+| A4 Forces and motion      | gravity, springs, two integrators validated against analytic solutions                | a ball flies a parabola; a spring oscillates |
+| A5 Camera                 | zoom, pan, the world-to-screen transform                                              | navigating the scene                         |
 | B1 Circle and ground      | the circle shape, a static ground, mass from density                                  | a circle resting on a floor line             |
 | B2 Circle detection       | contacts between circles and the ground, debug drawing                                | contact points and normals on screen         |
 | B3 Circle response        | restitution and rest, sliding friction                                                | the ball bounces, then slides to rest        |
@@ -44,8 +45,8 @@ flowchart TD
 
 ## Why this order
 
-- **A viewer comes early** (A2). It is the best debugging instrument the project will have, and it lets you see the work.
-- **Forces come with gravity** (A3). Springs have exact analytic solutions, so they are the cheapest way to validate integrators, and they define how forces enter the system before collisions exist.
+- **A viewer comes early** (A3). It is the best debugging instrument the project will have, and it lets you see the work.
+- **Forces come with gravity** (A4). Springs have exact analytic solutions, so they are the cheapest way to validate integrators, and they define how forces enter the system before collisions exist.
 - **Circles collide before rotation and polygons** (B before C). The first "ball bounces" win comes early, and the number of shape-pair tests stays small (N shape types need N(N+1)/2 tests). The cost is deliberate rework: the response is re-derived in C3 when rotation enters it (the cross terms appear). The alternative, rotation first, would derive the solver once but delay the first bounce.
 - **The capsule is deferred.** It adds several pair tests for little gain; a polygon with a rounding radius could cover it later.
 - **Interaction is split.** Spawn and launch are cheap (B4). Pick, drag and delete come later (C4) because deleting forces the body-removal design, and dragging properly means a force or a constraint, not "teleport to the mouse".

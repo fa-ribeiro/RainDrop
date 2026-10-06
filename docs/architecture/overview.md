@@ -47,16 +47,16 @@ Arrows mean "may import". Each module may import only what is below it, and `wor
 
 | Module        | Responsibility                                                              | First chapter | May import                                 |
 | ------------- | --------------------------------------------------------------------------- | ------------- | ------------------------------------------ |
-| `core`        | errors and validation helpers                                               | A1            | nothing                                    |
+| `core`        | errors and validation helpers                                               | A2            | nothing                                    |
 | `math`        | `Vector2` and later rotation helpers                                        | A1            | core                                       |
 | `geometry`    | shapes, transforms, area and inertia                                        | B1            | core, math                                 |
 | `collision`   | shape-pair tests, contacts                                                  | B2            | core, math, geometry                       |
-| `dynamics`    | bodies, mass, forces, integrators                                           | A1 to A3      | core, math, geometry                       |
+| `dynamics`    | bodies, mass, forces, integrators                                           | A2 to A4      | core, math, geometry                       |
 | `solver`      | contact response, later joints                                              | B3            | everything below                           |
-| `world`       | owns the state; commands, the step pipeline, the commit, snapshots, queries | A1            | everything below                           |
-| `runner`      | the real-time driver: loop and pacing                                       | A2            | the engine's `mod.ts`, render, interaction |
-| `render`      | canvas and SVG drawing                                                      | A2            | the engine's `mod.ts`, camera              |
-| `camera`      | zoom, pan, the world-to-screen transform                                    | A4            | the engine's `mod.ts`                      |
+| `world`       | owns the state; commands, the step pipeline, the commit, snapshots, queries | A2            | everything below                           |
+| `runner`      | the real-time driver: loop and pacing                                       | A3            | the engine's `mod.ts`, render, interaction |
+| `render`      | canvas and SVG drawing                                                      | A3            | the engine's `mod.ts`, camera              |
+| `camera`      | zoom, pan, the world-to-screen transform                                    | A5            | the engine's `mod.ts`                      |
 | `interaction` | input turned into commands                                                  | B4            | the engine's `mod.ts`, camera              |
 
 The outer layers import only `engine/mod.ts`, never engine internals. Anything not exported from a module's `mod.ts` is internal and may change without notice. The name of the outer folder is deliberately open until chapter A2, when the runner arrives and the folder holds more than visualization.
@@ -108,10 +108,10 @@ A table of allowed imports between engine modules is deferred. Its trigger is th
 
 ## How modules appear
 
-A folder, an interface or a doc is created when a chapter shows a need and its shape and purpose are clear. The map above is a hypothesis, and the "first chapter" column says when each module is expected to earn its place. An interface follows the rule of two: it is introduced only when a second implementation exists. The first likely case is explicit versus semi-implicit Euler in chapter A3.
+A folder, an interface or a doc is created when a chapter shows a need and its shape and purpose are clear. The map above is a hypothesis, and the "first chapter" column says when each module is expected to earn its place. An interface follows the rule of two: it is introduced only when a second implementation exists. The first likely case is explicit versus semi-implicit Euler in chapter A4.
 
 ## Open items
 
-- The name and shape of the outer folder (chapter A2).
+- The name and shape of the outer folder (chapter A3).
 - Whether pick and drag are a force or a constraint (chapter C4).
-- Stable ids and body removal (designed in A1, exercised in C4).
+- Stable ids and body removal (designed in A2, exercised in C4).

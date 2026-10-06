@@ -9,6 +9,7 @@ A short record exists for each decision that is costly to reverse. It keeps the 
 | [0003](0003-mass-in-a-2d-world.md)                   | Mass in a 2D world: a slice 1 m thick                           |
 | [0004](0004-engine-boundary.md)                      | The engine boundary: commands, step, snapshots, atomic step     |
 | [0005](0005-module-structure-and-enforcement.md)     | Module structure and how much of it to enforce                  |
+| [0006](0006-vector2.md)                              | Vector2: an immutable class with public readonly fields         |
 
 ## Template
 

@@ -55,6 +55,18 @@ Mass needs a volume and a 2D world only has area, so the world is treated as a s
 
 Because the numbers are those of an area density in kg/m², the other engines' habits apply as well: a water-density disc the size of a football weighs about 38 kg, and only mass ratios matter for gravity-only motion. Interaction tools therefore set a velocity change (Δv), not newtons.
 
+## Observable by design
+
+Tests must be able to see what the code did, and they must be able to fail.
+
+1. **Data that crosses a boundary is plain**: public, `readonly`, serializable, and comparable by deep equality. `Vector2` is the model: with `#` fields it would serialize as `{}` and make deep equality blind (see [ADR 0006](decisions/0006-vector2.md)).
+2. **Everything the engine does is observable through its public surface**: snapshots, errors that carry the failed state, deterministic replay. Tests never reach in with casts or bracket access to private fields.
+3. **If something is hard to observe, add an observation point**, do not loosen privacy. A private piece that needs its own test probably wants to be its own module.
+4. **Colocated unit tests may use their own module's internals**, meaning exports that are not re-exported from `mod.ts`. Cross-module tests use `mod.ts` only.
+5. **A test must be able to fail.** Every guard and test has a negative case: break the code on purpose and check that a test goes red.
+
+This is a directive, not a guard. Revisit it the first time a test needs an `as any`.
+
 ## Documenting units
 
 ```ts

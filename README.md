@@ -54,5 +54,6 @@ flowchart LR
 - [Conventions](docs/conventions.md): units, axes, time, errors, defaults
 - [Architecture overview](docs/architecture/overview.md): modules, the engine boundary, enforcement
 - [Decision records](docs/decisions/README.md): what was decided, and the alternatives rejected
+- [Lessons learned](docs/lessons.md): what each chapter taught us
 - [Working agreement](docs/.project/workflow.md)
 - [Handover](docs/.project/handover.md): where the project stands and how to resume it

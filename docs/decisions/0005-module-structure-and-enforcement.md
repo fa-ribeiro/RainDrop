@@ -16,7 +16,7 @@ The owner wants a very modular project in which the engine does not depend on vi
 | Pluggability      | an interface only when a second implementation exists (the rule of two)                                         | An interface for every algorithm up front: indirection and abstractions that fit nothing                                                                                                      |
 | Existence         | need-driven: folders, modules, interfaces and docs appear when a need is shown                                  | Scaffolding for modules that may exist: empty structure that drifts                                                                                                                           |
 | Enforcement       | directive plus API discipline, with one executable guard                                                        | No guard at all: fine for readers, but erosion, one convenient import at a time, is the real risk across chats. A full table of allowed imports now: no proven need with two or three modules |
-| Outer folder name | `visualization`, to be revisited in chapter A2                                                                  | A rename now, before the runner exists, would be a guess                                                                                                                                      |
+| Outer folder name | `visualization`, to be revisited in chapter A3                                                                  | A rename now, before the runner exists, would be a guess                                                                                                                                      |
 
 ## Decision
 
@@ -29,4 +29,4 @@ The owner wants a very modular project in which the engine does not depend on vi
 
 - A new chat is directed by the docs; the guard backs the single rule that matters most.
 - Unresolved imports must make any dependency check fail, because a guard that passes when it cannot see is worse than none.
-- Reopen the outer folder name, and whether to split it, in chapter A2.
+- Reopen the outer folder name, and whether to split it, in chapter A3.
