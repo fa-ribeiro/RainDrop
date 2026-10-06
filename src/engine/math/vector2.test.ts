@@ -35,3 +35,40 @@ Deno.test("Vector2 is plain data: structural, serializable and comparable", () =
   assertEquals(new Vector2(1, 2), new Vector2(1, 2));
   assertNotEquals(new Vector2(1, 2), new Vector2(3, 4));
 });
+
+Deno.test("add returns the component-wise sum and leaves both operands unchanged", () => {
+  const a = new Vector2(1, 2);
+  const b = new Vector2(3, 4);
+  const sum = a.add(b);
+  assertEquals(sum, new Vector2(4, 6));
+  assertEquals(a, new Vector2(1, 2));
+  assertEquals(b, new Vector2(3, 4));
+  assertEquals(sum === a || sum === b, false);
+});
+
+Deno.test("sub returns this minus other, not the other way round", () => {
+  const difference = new Vector2(5, 7).sub(new Vector2(2, 3));
+  assertEquals(difference, new Vector2(3, 4));
+  assertEquals(new Vector2(2, 3).sub(new Vector2(5, 7)), new Vector2(-3, -4));
+});
+
+Deno.test("scale multiplies both components and leaves the vector unchanged", () => {
+  const v = new Vector2(1.5, -2);
+  assertEquals(v.scale(2), new Vector2(3, -4));
+  assertEquals(v.scale(-1), new Vector2(-1.5, 2));
+  assertEquals(v, new Vector2(1.5, -2));
+});
+
+Deno.test("add and sub accept any object with x and y", () => {
+  assertEquals(new Vector2(1, 2).add({ x: 10, y: 20 }), new Vector2(11, 22));
+  assertEquals(new Vector2(11, 22).sub({ x: 10, y: 20 }), new Vector2(1, 2));
+});
+
+Deno.test("the operations agree with each other exactly", () => {
+  // These hold bit for bit, even with floats that are not exactly representable:
+  // addition is commutative, and subtracting equals adding the negated vector.
+  const a = new Vector2(0.1, 0.2);
+  const b = new Vector2(0.3, 0.4);
+  assertEquals(a.add(b), b.add(a));
+  assertEquals(a.sub(b), a.add(b.scale(-1)));
+});

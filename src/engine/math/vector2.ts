@@ -45,4 +45,36 @@ export class Vector2 implements Vector2Like {
     this.x = x;
     this.y = y;
   }
+
+  /**
+   * Adds another vector.
+   *
+   * @param other The vector to add: a Vector2 or any object with `x` and `y`.
+   * @returns A new vector holding the component-wise sum. Neither operand changes.
+   */
+  add(other: Vector2Like): Vector2 {
+    return new Vector2(this.x + other.x, this.y + other.y);
+  }
+
+  /**
+   * Subtracts another vector: `this - other`.
+   *
+   * @param other The vector to subtract: a Vector2 or any object with `x` and `y`.
+   * @returns A new vector holding the component-wise difference. Neither operand changes.
+   */
+  sub(other: Vector2Like): Vector2 {
+    return new Vector2(this.x - other.x, this.y - other.y);
+  }
+
+  /**
+   * Multiplies both components by a number.
+   *
+   * A negative factor reverses the direction, and a factor of 0 gives a zero-length vector.
+   *
+   * @param factor The number to multiply by (a plain number, with no unit of its own).
+   * @returns A new vector holding the scaled components. This vector does not change.
+   */
+  scale(factor: number): Vector2 {
+    return new Vector2(this.x * factor, this.y * factor);
+  }
 }
