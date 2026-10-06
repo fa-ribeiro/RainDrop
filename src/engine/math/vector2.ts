@@ -77,4 +77,34 @@ export class Vector2 implements Vector2Like {
   scale(factor: number): Vector2 {
     return new Vector2(this.x * factor, this.y * factor);
   }
+
+  /**
+   * Dot product with another vector: `x * other.x + y * other.y`.
+   *
+   * It equals `|a| * |b| * cos(angle between them)`. It is positive when the vectors point to the
+   * same side, zero when they are perpendicular, and negative when they point to opposite sides. For
+   * a unit-length `n`, `v.dot(n)` is the length of the shadow of `v` along `n`: later chapters use it
+   * to split a velocity into the part along a contact normal and the rest.
+   *
+   * @param other The other vector: a Vector2 or any object with `x` and `y`.
+   * @returns A plain number. Its unit is the product of the units of the two vectors (a force in
+   * newtons dotted with a displacement in meters gives joules).
+   */
+  dot(other: Vector2Like): number {
+    return this.x * other.x + this.y * other.y;
+  }
+
+  /**
+   * Length (magnitude) of the vector, in the vector's own unit.
+   *
+   * It is the square root of the dot product of the vector with itself. That is faster than
+   * `Math.hypot`, at the price of overflowing to `Infinity` above components of about 1e150 and
+   * losing precision below about 1e-150. Physical sizes in this engine (roughly 0.1 to 10 m) are
+   * far inside that range, and a step that produced `Infinity` would be rejected by the commit check.
+   *
+   * @returns The length, never negative.
+   */
+  length(): number {
+    return Math.sqrt(this.dot(this));
+  }
 }

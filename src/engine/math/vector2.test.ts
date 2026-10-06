@@ -72,3 +72,34 @@ Deno.test("the operations agree with each other exactly", () => {
   assertEquals(a.add(b), b.add(a));
   assertEquals(a.sub(b), a.add(b.scale(-1)));
 });
+
+Deno.test("dot returns the sum of the component products", () => {
+  assertEquals(new Vector2(1, 2).dot(new Vector2(3, 4)), 11);
+  assertEquals(new Vector2(1, 2).dot({ x: 3, y: 4 }), 11);
+});
+
+Deno.test("dot is zero for perpendicular vectors and negative for opposite ones", () => {
+  assertEquals(new Vector2(1, 0).dot(new Vector2(0, 5)), 0);
+  assertEquals(new Vector2(3, 4).dot(new Vector2(-4, 3)), 0);
+  assertEquals(new Vector2(1, 0).dot(new Vector2(-2, 0)), -2);
+});
+
+Deno.test("dot is commutative and leaves its operands unchanged", () => {
+  const a = new Vector2(0.1, 0.2);
+  const b = new Vector2(0.3, 0.4);
+  assertEquals(a.dot(b), b.dot(a));
+  assertEquals(a, new Vector2(0.1, 0.2));
+  assertEquals(b, new Vector2(0.3, 0.4));
+});
+
+Deno.test("length of the 3-4-5 triangle is 5, whatever the signs", () => {
+  assertEquals(new Vector2(3, 4).length(), 5);
+  assertEquals(new Vector2(-3, -4).length(), 5);
+  assertEquals(new Vector2(0, 0).length(), 0);
+});
+
+Deno.test("length scales linearly and is the square root of the dot with itself", () => {
+  const v = new Vector2(3, 4);
+  assertEquals(v.scale(2).length(), 10);
+  assertEquals(v.length() ** 2, v.dot(v));
+});
