@@ -1,0 +1,48 @@
+/**
+ * Anything with numeric `x` and `y`: the shape in which vectors enter and leave the engine.
+ *
+ * A {@link Vector2} satisfies it, and so does a plain object such as `{ x: 1, y: 2 }`. Taking this
+ * type at the boundaries keeps callers free of engine classes, and keeps snapshots plain data.
+ */
+export interface Vector2Like {
+  /** Horizontal component. */
+  readonly x: number;
+  /** Vertical component. */
+  readonly y: number;
+}
+
+/**
+ * An immutable 2D vector of 64-bit floats.
+ *
+ * Immutable means that no operation changes a vector: operations return a new one. Several bodies
+ * may therefore share a vector safely, and a committed world state can be observed without copying.
+ *
+ * A vector does not know what its components measure (meters, meters per second, newtons...). Whoever
+ * holds a vector documents the unit.
+ *
+ * > **Note:** the fields are public and `readonly` on purpose. A vector is plain data with no
+ * > invariant to protect (any pair of numbers is a vector). Hiding it behind `private` or `#`
+ * > fields would add getter boilerplate and break things that rely on plain data: `#` fields
+ * > serialize as `{}` and make deep equality in tests blind, and `private` leaks internal names
+ * > into `JSON.stringify`.
+ *
+ * The constructor does not validate its arguments: it is used in hot loops. Values entering the
+ * engine are validated at the world boundary.
+ */
+export class Vector2 implements Vector2Like {
+  /** Horizontal component, in the unit of whatever the vector represents. */
+  readonly x: number;
+  /** Vertical component, in the unit of whatever the vector represents. */
+  readonly y: number;
+
+  /**
+   * Creates a vector.
+   *
+   * @param x Horizontal component.
+   * @param y Vertical component.
+   */
+  constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
+}

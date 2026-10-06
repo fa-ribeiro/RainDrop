@@ -14,4 +14,5 @@
  * @module
  */
 
-export {};
+export { Vector2 } from "./math/mod.ts";
+export type { Vector2Like } from "./math/mod.ts";
