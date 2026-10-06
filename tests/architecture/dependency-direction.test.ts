@@ -37,7 +37,7 @@ async function listSourceFiles(dir: string): Promise<string[]> {
   for await (const entry of Deno.readDir(dir)) {
     const path = `${dir}/${entry.name}`;
     if (entry.isDirectory) {
-      files.push(...await listSourceFiles(path));
+      files.push(...(await listSourceFiles(path)));
     } else if (entry.name.endsWith(".ts") && !entry.name.endsWith(".test.ts")) {
       files.push(path);
     }

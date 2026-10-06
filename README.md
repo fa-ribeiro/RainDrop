@@ -1,7 +1,6 @@
 # Physics 2D
 
-A 2D physics engine written from scratch as a learning project. The name is a working title and can
-change at any time.
+A 2D physics engine written from scratch as a learning project. The name is a working title and can change at any time.
 
 > **Status:** Goal 0, foundation. There is no physics code yet.
 
@@ -31,8 +30,7 @@ examples/         small applications that use the engine and a renderer (added w
 docs/             documentation; docs/.project holds the working agreement and the handover
 ```
 
-Unit tests sit next to the code they test as `*.test.ts`. Cross-module tests go in `tests/`
-(`integration/` and `validation/` are created when the first test needs them).
+Unit tests sit next to the code they test as `*.test.ts`. Cross-module tests go in `tests/` (`integration/` and `validation/` are created when the first test needs them).
 
 ## Dependency rule
 
@@ -47,11 +45,14 @@ flowchart LR
     T --> V
 ```
 
-`tests/architecture/dependency-direction.test.ts` checks that the engine never reaches `src/visualization/`,
-`examples/` or `tests/`.
+`tests/architecture/dependency-direction.test.ts` checks that the engine never reaches `src/visualization/`, `examples/` or `tests/`.
 
 ## Documentation
 
 - [Scope and goals](docs/scope.md)
+- [Roadmap](docs/roadmap.md): phases, chapters and gates
+- [Conventions](docs/conventions.md): units, axes, time, errors, defaults
+- [Architecture overview](docs/architecture/overview.md): modules, the engine boundary, enforcement
+- [Decision records](docs/decisions/README.md): what was decided, and the alternatives rejected
 - [Working agreement](docs/.project/workflow.md)
 - [Handover](docs/.project/handover.md): where the project stands and how to resume it
